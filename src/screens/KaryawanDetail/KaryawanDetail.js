@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import {View, Image, Text, Button, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
 
-import { deletePlace } from '../../store/actions/index'
+import {Fire} from '../../firebase/index'
 
-class PlaceDetail extends Component {
+import { deleteEmploy } from '../../store/actions/index'
+
+class KaryawanDetail extends Component {
     placeDeletedHandler = () => {
-        this.props.onDeletePlace(this.props.selectedPlace.key)
+        var employee = Fire.database().ref('employee')
+        employee.child(this.props.selectedEmploy.key).remove()
+        this.props.onDeleteEmploy(this.props.selectedEmploy.key)
         this.props.navigator.pop()
     }
 
@@ -16,9 +20,12 @@ class PlaceDetail extends Component {
                 <View>
                     <Image
                         style={styles.placeImage}
-                        source={this.props.selectedPlace.image}
+                        source={this.props.selectedEmploy.image}
                     />
-                    <Text style={styles.placeName}>{this.props.selectedPlace.value}</Text>
+                    {/* <Text style={styles.placeName}>{this.props.selectedEmploy.value}</Text> */}
+                    <Text style={styles.placeName}>Nama: {this.props.nama}</Text>
+                    <Text style={styles.placeName}>Usia: {this.props.usia}</Text>
+                    <Text style={styles.placeName}>Jabatan: {this.props.jabatan}</Text>
                 </View>
                 <Button title='Delete' color='red' onPress={this.placeDeletedHandler}/>
             </View>
@@ -46,8 +53,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onDeletePlace: (key) => dispatch(deletePlace(key))
+        onDeleteEmploy: (key) => dispatch(deleteEmploy(key))
     }
 }
 
-export default connect(null, mapDispatchToProps)(PlaceDetail)
+export default connect(null, mapDispatchToProps)(KaryawanDetail)

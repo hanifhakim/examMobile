@@ -8,7 +8,7 @@ const ListItem = props => (
                 style = {styles.placeImage}
                 source={props.placeImage}
             />
-            <Text>{props.placeName}</Text>
+            <Text>{props.nama}</Text>
         </View>
     </TouchableOpacity>
     

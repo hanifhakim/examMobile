@@ -1,5 +1,5 @@
-export const ADD_PLACE = 'ADD_PLACE'
-export const DELETE_PLACE = 'DELETE_PLACE'
+export const ADD_EMPLOY = 'ADD_EMPLOY'
+export const DELETE_EMPLOY = 'DELETE_EMPLOY'
 export const CREATE_DATA = 'CREATE_DATA'
 
 

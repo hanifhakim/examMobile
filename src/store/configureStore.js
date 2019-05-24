@@ -1,10 +1,10 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
 
-import placesReducer from './reducers/places'
+import employReducer from './reducers/employee'
 import authReducer from './reducers/auth'
 
 const rootReducer = combineReducers({
-    places: placesReducer,
+    employ: employReducer,
     auth: authReducer
 })
 

@@ -1,16 +1,16 @@
-import { ADD_PLACE, DELETE_PLACE, CREATE_DATA } from './actionTypes'
+import { ADD_EMPLOY, DELETE_EMPLOY, CREATE_DATA } from './actionTypes'
 
-export const addPlace = placeName => {
+export const addEmploy = name => {
     return {
-        type: ADD_PLACE,
-        placeName: placeName
+        type: ADD_EMPLOY,
+        name: name
     }
 }
 
-export const deletePlace = (key) => {
+export const deleteEmploy = (key) => {
     return {
-        type: DELETE_PLACE,
-        placeKey: key
+        type: DELETE_EMPLOY,
+        itemKey: key
     }
 }
 
@@ -21,7 +21,9 @@ export const createData = (items) => {
         Object.keys(rawData).forEach(id => {
             arrData.push({
                 key: id,
-                value: rawData[id].name,
+                nama: rawData[id].nama,
+                usia: rawData[id].usia,
+                jabatan: rawData[id].jabatan,
                 image: {
                     uri: "https://freerangestock.com/sample/78746/halloween-cat-icon-means-trick-or-treat-and-autumn.jpg"
                 }

@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux'
 
+import { createData } from '../../store/actions/index'
+import {Fire} from '../../firebase/index'
+
 import PlaceList from '../../components/PlaceList/PlaceList'
 
-class FindPlaceScreen extends Component {
+class ListKaryawan extends Component {
     constructor(props) {
         super(props)
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
@@ -19,17 +22,26 @@ class FindPlaceScreen extends Component {
             }
         }
     }
+    componentDidMount = () => {
+        var employee = Fire.database().ref('employee')
+        employee.once('value', this.props.onCreateData, (err)=>{console.log(err);
+        })
+
+    }
 
     itemSelectedHandler = (key) => {
         // selPlace = {value, key, image}
-        const selPlace = this.props.places.find(place => {
-            return place.key == key
+        const selEmploy = this.props.employ.find(item => {
+            return item.key == key
         })
         this.props.navigator.push({
-            screen: 'jc8reactnative.PlaceDetailScreen',
-            title: selPlace.value,
+            screen: 'jc8reactnative.KaryawanDetailScreen',
+            title: selEmploy.nama,
             passProps: {
-                selectedPlace: selPlace
+                selectedEmploy: selEmploy,
+                nama: selEmploy.nama,
+                usia: selEmploy.usia,
+                jabatan: selEmploy.jabatan
             }
         })
     }
@@ -38,7 +50,7 @@ class FindPlaceScreen extends Component {
         return (
             <View>
                 <PlaceList 
-                    places ={this.props.places}
+                    places ={this.props.employ}
                     onItemSelected={this.itemSelectedHandler}
                 />
             </View>
@@ -48,10 +60,14 @@ class FindPlaceScreen extends Component {
 
 const mapStateToProps = state => {
     return {
-        places: state.places.places
+        employ: state.employ.employ
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onCreateData: items => dispatch(createData(items))
     }
 }
 
 
-
-export default connect(mapStateToProps)(FindPlaceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ListKaryawan);

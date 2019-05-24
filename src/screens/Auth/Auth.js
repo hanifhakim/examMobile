@@ -128,6 +128,9 @@ class AuthScreen extends Component {
         return (
             <ImageBackground source={imageBackground} style={styles.backgroundImage}>
                 <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <MainText>
+                        <HeadingText>Haniful Hakim</HeadingText>
+                </MainText>
                     {headingTextControl}
                     <ButtonWithBackground color='#a5b4ef' onTekan={this.switchAuthModeHandler}>
                         Switch to {this.state.authMode === 'login' ? 'Signup' : 'Login'}
